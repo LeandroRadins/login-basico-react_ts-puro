@@ -1,9 +1,9 @@
+// TODO - Add icon line:57 https://fontawesome.com/icons/calendar-days?f=classic&s=solid
 import { useState } from "react";
 import pinguino from "../assets/pinguino.jpg";
 
-import { Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
-import { es } from 'date-fns/locale';
+import { es } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -28,7 +28,6 @@ function Register() {
         </div>
         <div id="campos" className={`container ${flexCenter}`}>
           <h2 className="text-2xl font-medium">Datos Personales</h2>
-
           <input
             id="name"
             name="name"
@@ -54,8 +53,11 @@ function Register() {
                   !date && "text-muted-foreground"
                 )}
               >
-                //<CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? format(date, "dd/MM/yyyy") : <span>Fecha de Nacimiento</span>}
+                {date ? (
+                  format(date, "dd/MM/yyyy")
+                ) : (
+                  <span>Fecha de Nacimiento</span>
+                )}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="center">
@@ -68,7 +70,6 @@ function Register() {
               />
             </PopoverContent>
           </Popover>
-
           <hr />
           <h2 className="text-2xl font-medium">Datos de Sesión</h2>
           <input
