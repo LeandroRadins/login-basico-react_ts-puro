@@ -9,6 +9,7 @@ import {
   navigationMenuTriggerStyle,
 } from "./components/ui/navigation-menu";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
         <h1 className="bg-orange-500">Espacio para un footer</h1>
       </div>
       <Login />
+      <Register />
     </div>
   );
 }

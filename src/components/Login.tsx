@@ -1,4 +1,3 @@
-import work_chat from "../assets/work_chat.svg";
 import llama from "../assets/llama.jpg";
 
 const flexCenter = "flex justify-center gap-4 flex-col";
@@ -6,13 +5,12 @@ const flexCenter = "flex justify-center gap-4 flex-col";
 function Login() {
   return (
     <div className="container h-screen grid grid-cols-2 text-center py-14">
-      <div className="bg-[#231942] flex justify-center items-center rounded-s-3xl">
-        <img
-          src={llama}
-          alt="Personas trabajando en equipo..."
-          className="w-2/3 h-2/3 object-cover rounded-3xl"
-        />
-      </div>
+      <div
+        className="bg-[#B3DEE2] flex justify-center items-center rounded-s-3xl bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${llama})`,
+        }}
+      ></div>
       <div className={`${flexCenter} px-20 bg-[#fbcec3] rounded-e-3xl `}>
         <div id="texto" className="text-[#30120b]">
           <h1 className="font-black text-5xl">Iniciar Sesión</h1>
@@ -23,7 +21,7 @@ function Login() {
             id="email"
             name="email"
             type="email"
-            className="border-2 border-blue-950 rounded-md p-2 text-blue-950"
+            className="border-2 border-black rounded-md p-2 text-black"
             placeholder="Ingrese su correo electrónico"
             onChange={() => {}}
           />
@@ -31,7 +29,7 @@ function Login() {
             id="password"
             name="password"
             type="password"
-            className="border-2 border-blue-950 rounded-md p-2 text-blue-950"
+            className="border-2 border-black rounded-md p-2 text-black"
             placeholder="Ingrese su contraseña"
             onChange={() => {}}
           />
