@@ -1,36 +1,67 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import work_chat from "../src/assets/work_chat.svg";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "./components/ui/navigation-menu";
+import Login from "./components/Login";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    // TODO - Add a navigation menu
+    // TODO - Add a footer
+    // <>
+    // navbar
+    // content
+    // footer
+    // </>
+
+    <div className="bg-neutral-100 h-screen">
+      <div className="bg-black">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <a href="/docs">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Ver mi perfil
+                </NavigationMenuLink>
+              </a>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <h1 className="bg-orange-500 pb-2">Espacio para una navbar</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div id="content" className="container text-center">
+        <h1 className="text-7xl font-extrabold pt-28">Bienvenidos!</h1>
+        <h2 className="py-14 text-5xl">
+          El sitio se encuentra en construcción...{" "}
+          <span>ingrese mas tarde</span>
+        </h2>
+        <div className="flex justify-center">
+          <img
+            src={work_chat}
+            alt="Personas trabajando en equipo..."
+            className="col-start-2 h-80"
+          />
+        </div>
+        <div className="py-14">
+          <Button
+            className="p-8 text-2xl font-semibold rounded-2xl bg-[#F25A38] text-[#F2E2DC] hover:text-[#F25A38] hover:bg-[#F2E2DC] outline outline-offset-2 outline-2 outline-[#F25A38]"
+            onClick={() => console.log("PEPE")}
+          >
+            Acceder al Login
+          </Button>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Button onClick={() => console.log("pepe")}>Boton de prueba</Button>
-    </>
+      <div id="footer">
+        <h1 className="bg-orange-500">Espacio para un footer</h1>
+      </div>
+      <Login />
+    </div>
   );
 }
 
