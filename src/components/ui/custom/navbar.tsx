@@ -5,7 +5,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className={`flex w-full items-center bg-white dark:bg-dark`}>
+    <header
+      id="navbar"
+      className={`flex w-full items-center bg-white dark:bg-dark`}
+    >
       <div className="container">
         <div className="relative -mx-4 flex items-center justify-between">
           <div className="w-60 max-w-full px-4">
@@ -81,13 +84,10 @@ const ListItem = ({
   className: string;
 }) => {
   return (
-      <li className="list-none">
-        <Link
-          to={NavLink}
-          className={className}
-        >
-          {children}
-        </Link>
-      </li>
+    <li className="list-none">
+      <Link to={NavLink} className={className}>
+        {children}
+      </Link>
+    </li>
   );
 };
