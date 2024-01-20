@@ -1,40 +1,14 @@
 import "./App.css";
 import { Button } from "@/components/ui/button";
 import work_chat from "../src/assets/work_chat.svg";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from "./components/ui/navigation-menu";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Navbar from "./components/ui/custom/navbar";
+import Footer from "./components/ui/custom/footer";
 
 function App() {
   return (
-    // TODO - Add a navigation menu
-    // TODO - Add a footer
-    // <>
-    // navbar
-    // content
-    // footer
-    // </>
-
     <div className="bg-neutral-100 h-screen">
-      <div className="bg-black">
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <a href="/docs">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Ver mi perfil
-                </NavigationMenuLink>
-              </a>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-        <h1 className="bg-orange-500 pb-2">Espacio para una navbar</h1>
+      <div id="navbar">
+        <Navbar />
       </div>
       <div id="content" className="container text-center">
         <h1 className="text-7xl font-extrabold pt-28">Bienvenidos!</h1>
@@ -59,10 +33,8 @@ function App() {
         </div>
       </div>
       <div id="footer">
-        <h1 className="bg-orange-500">Espacio para un footer</h1>
+        <Footer />
       </div>
-      <Login />
-      <Register />
     </div>
   );
 }

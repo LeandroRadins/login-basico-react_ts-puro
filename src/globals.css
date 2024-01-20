@@ -66,11 +66,17 @@
   }
 }
 
-@layer base {
+/*@layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}*/
+
+@layer components{
+  .flexCenter{
+    @apply flex justify-center items-center;
   }
 }
