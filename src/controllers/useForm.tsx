@@ -1,8 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { FormData } from "@/controllers/dtos";
+import { FormDataLogin, FormDataRegister } from "@/controllers/dtos";
+import { SelectSingleEventHandler } from "react-day-picker";
 
 interface UseFormParams {
-  formulario: FormData | any;
+  formulario: FormDataLogin | FormDataRegister | any;
+  date: Date | any;
+  handleDate: () => SelectSingleEventHandler;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   resetState: () => void;
   validate: (e: FormEvent<HTMLFormElement>) => void;
@@ -10,12 +13,20 @@ interface UseFormParams {
 
 export const useForm = <T extends Object>(initialState: T): UseFormParams => {
   const [formulario, setFormulario] = useState(initialState);
+  const [date, setDate] = useState(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormulario({
       ...formulario,
       [name]: value,
+    });
+  };
+
+  const handleDate = () => {
+    setDate({
+      ...date,
+      birthday: date,
     });
   };
 
@@ -58,6 +69,8 @@ export const useForm = <T extends Object>(initialState: T): UseFormParams => {
 
   return {
     formulario,
+    date,
+    handleDate,
     handleChange,
     resetState,
     validate,

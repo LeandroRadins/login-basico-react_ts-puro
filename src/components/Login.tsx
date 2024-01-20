@@ -1,7 +1,7 @@
 import llama from "../assets/llama.jpg";
 import Navbar from "./ui/custom/navbar";
 import { useForm } from "@/controllers/useForm";
-import { FormData } from "@/controllers/dtos";
+import { FormDataLogin } from "@/controllers/dtos";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const flexCenter = "flex justify-center gap-4 flex-col";
 
 const Login = () => {
-  const { formulario, handleChange, validate } = useForm<FormData>({
+  const { formulario, handleChange, validate } = useForm<FormDataLogin>({
     email: "",
     password: "",
   });

@@ -1,5 +1,4 @@
 // TODO - Add icon line:57 https://fontawesome.com/icons/calendar-days?f=classic&s=solid
-import { useState } from "react";
 import pinguino from "../assets/pinguino.jpg";
 
 import { format } from "date-fns";
@@ -14,11 +13,20 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Navbar from "./ui/custom/navbar";
+import { useForm } from "@/controllers/useForm";
+import { FormDataRegister } from "@/controllers/dtos";
 
 const flexCenter = "flex justify-center gap-4 flex-col";
 
 function Register() {
-  const [date, setDate] = useState<Date>();
+  const { formulario, date, handleDate } =
+    useForm<FormDataRegister>({
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      birthday: new Date(),
+    });
 
   return (
     <div>
@@ -37,6 +45,7 @@ function Register() {
               id="name"
               name="name"
               type="text"
+              value={formulario.name}
               className="border-2 border-black rounded-md p-2 text-black"
               placeholder="Ingrese su nombre completo"
               onChange={() => {}}
@@ -45,6 +54,7 @@ function Register() {
               id="username"
               name="username"
               type="text"
+              value={formulario.username}
               className="border-2 border-black rounded-md p-2 text-black"
               placeholder="Ingrese un nombre de usuario"
               onChange={() => {}}
@@ -61,16 +71,17 @@ function Register() {
                   {date ? (
                     format(date, "dd/MM/yyyy")
                   ) : (
-                    <span>Fecha de Nacimiento</span>
+                    <span>{format(formulario.birthday, "dd/MM/yyyy")}</span>
                   )}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="center">
                 <Calendar
+                  id="birthday"
                   mode="single"
                   locale={es}
                   selected={date}
-                  onSelect={setDate}
+                  onSelect={handleDate}
                   initialFocus
                 />
               </PopoverContent>
