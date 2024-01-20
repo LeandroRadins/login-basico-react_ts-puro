@@ -19,14 +19,13 @@ import { FormDataRegister } from "@/controllers/dtos";
 const flexCenter = "flex justify-center gap-4 flex-col";
 
 function Register() {
-  const { formulario, date, handleDate } =
-    useForm<FormDataRegister>({
-      name: "",
-      username: "",
-      email: "",
-      password: "",
-      birthday: new Date(),
-    });
+  const { formulario, date, handleDate } = useForm<FormDataRegister>({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    birthday: new Date(),
+  });
 
   return (
     <div>
@@ -71,7 +70,7 @@ function Register() {
                   {date ? (
                     format(date, "dd/MM/yyyy")
                   ) : (
-                    <span>{format(formulario.birthday, "dd/MM/yyyy")}</span>
+                    <span>Ingrese una fecha</span>
                   )}
                 </Button>
               </PopoverTrigger>
@@ -81,7 +80,7 @@ function Register() {
                   mode="single"
                   locale={es}
                   selected={date}
-                  onSelect={handleDate}
+                  onSelect={(date) => date && handleDate(date)}
                   initialFocus
                 />
               </PopoverContent>
