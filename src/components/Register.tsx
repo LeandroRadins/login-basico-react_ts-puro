@@ -15,17 +15,19 @@ import {
 import Navbar from "./ui/custom/navbar";
 import { useForm } from "@/controllers/useForm";
 import { FormDataRegister } from "@/controllers/dtos";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 const flexCenter = "flex justify-center gap-4 flex-col";
 
 function Register() {
-  const { formulario, date, handleDate } = useForm<FormDataRegister>({
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    birthday: new Date(),
-  });
+  const { formulario, date, handleChange, handleDate, validate } =
+    useForm<FormDataRegister>({
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+    });
 
   return (
     <div>
@@ -38,77 +40,119 @@ function Register() {
             <h1 className="font-black text-5xl">Crear nueva cuenta</h1>
             <h3>Ingrese los datos solicitados para crear una nueva cuenta</h3>
           </div>
-          <div id="campos" className={`container ${flexCenter}`}>
-            <h2 className="text-2xl font-medium">Datos Personales</h2>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formulario.name}
-              className="border-2 border-black rounded-md p-2 text-black"
-              placeholder="Ingrese su nombre completo"
-              onChange={() => {}}
-            />
-            <input
-              id="username"
-              name="username"
-              type="text"
-              value={formulario.username}
-              className="border-2 border-black rounded-md p-2 text-black"
-              placeholder="Ingrese un nombre de usuario"
-              onChange={() => {}}
-            />
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "justify-start text-left font-normal border-2 border-black rounded-md p-2 text-black",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  {date ? (
-                    format(date, "dd/MM/yyyy")
-                  ) : (
-                    <span>Ingrese una fecha</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="center">
-                <Calendar
-                  id="birthday"
-                  mode="single"
-                  locale={es}
-                  selected={date}
-                  onSelect={(date) => date && handleDate(date)}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <hr />
-            <h2 className="text-2xl font-medium">Datos de Sesión</h2>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="border-2 border-black rounded-md p-2 text-black"
-              placeholder="Ingrese su correo electrónico"
-              onChange={() => {}}
-            />
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="border-2 border-black rounded-md p-2 text-black"
-              placeholder="Ingrese su contraseña"
-              onChange={() => {}}
-            />
-          </div>
-          <div id="botones" className="my-4">
-            <button className="px-8 py-2 text-lg font-semibold rounded-xl bg-[#F25A38] hover:text-[#F25A38] text-white hover:bg-white outline outline-offset-2 outline-2 outline-[#F25A38]">
-              Crear cuenta
-            </button>
-          </div>
+          <form onSubmit={validate}>
+            <div id="campos" className={`container ${flexCenter}`}>
+              <h2 className="text-2xl font-medium">Datos Personales</h2>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formulario.name}
+                onChange={handleChange}
+                className="border-2 border-black rounded-md p-2 text-black"
+                placeholder="Ingrese su nombre completo"
+              />
+              <input
+                id="username"
+                name="username"
+                type="text"
+                value={formulario.username}
+                onChange={handleChange}
+                className="border-2 border-black rounded-md p-2 text-black"
+                placeholder="Ingrese un nombre de usuario"
+              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "justify-start text-left font-normal border-2 border-black rounded-md p-2 text-black",
+                      !date && "text-muted-foreground"
+                    )}
+                  >
+                    {date ? (
+                      format(date, "dd/MM/yyyy")
+                    ) : (
+                      <span>Ingrese una fecha</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="center">
+                  <Calendar
+                    id="birthday"
+                    mode="single"
+                    locale={es}
+                    selected={date}
+                    onSelect={(date) => date && handleDate(date)}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <hr />
+              <h2 className="text-2xl font-medium">Datos de Sesión</h2>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formulario.email}
+                onChange={handleChange}
+                className="border-2 border-black rounded-md p-2 text-black"
+                placeholder="Ingrese su correo electrónico"
+              />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                value={formulario.password}
+                onChange={handleChange}
+                className="border-2 border-black rounded-md p-2 text-black"
+                placeholder="Ingrese su contraseña"
+              />
+            </div>
+            <div id="botones" className="my-4">
+              <button
+                type="submit"
+                className="px-8 py-2 text-lg font-semibold rounded-xl bg-[#F25A38] hover:text-[#F25A38] text-white hover:bg-white outline outline-offset-2 outline-2 outline-[#F25A38]"
+              >
+                Crear cuenta
+              </button>
+            </div>
+          </form>
+
+          <h2>
+            {formulario.password} {formulario.email} {formulario.name}{" "}
+            {formulario.username} {formulario.valid}{" "}
+            {format(date, "dd/MM/yyyy")}
+          </h2>
+
+          {/* // Este codigo no lo mantiene ni jesus en un futuro
+          // Fecha de creacion de semejante monstruosidad: 20/01/2024 */}
+          {formulario.valid === true &&
+          formulario.email != "" &&
+          formulario.password != "" ? (
+            <Alert className="text-start" variant="destructive">
+              <ExclamationTriangleIcon className="h-4 w-4" />
+              <AlertTitle className="font-bold">
+                Que onda loco, ta mal tu paswol loco.
+              </AlertTitle>
+              <AlertDescription>
+                Ponete las pilas y escribí bien tu contraseña, no seas boludo.
+              </AlertDescription>
+            </Alert>
+          ) : formulario.valid === false ? (
+            <Alert className="text-start" variant="default">
+              <ExclamationTriangleIcon className="h-4 w-4" />
+              <AlertTitle className="font-bold">
+                Seja Benvindo manito kkk.
+              </AlertTitle>
+              <AlertDescription>
+                Por si las dudas le recordamos su contraseña en un div:
+                {formulario.password}
+              </AlertDescription>
+            </Alert>
+          ) : (
+            ""
+          )}
 
           <div id="footer">
             <h3>

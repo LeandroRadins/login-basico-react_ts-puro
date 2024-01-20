@@ -9,5 +9,4 @@ export interface FormDataRegister {
   username: string;
   email: string;
   password: string;
-  birthday: Date;
 }
